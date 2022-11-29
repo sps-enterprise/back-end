@@ -1,0 +1,6 @@
+# Backend
+
+## Running
+```
+npm start
+```
