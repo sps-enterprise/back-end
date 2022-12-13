@@ -3,14 +3,17 @@ const getAll = async () => {
 };
 
 const createONG = async (ONG) => {
+  const { nome, telefone, email, endereco } = ONG;
+
   return {};
 };
 
 const deleteONG = async (id) => {
-  return {}; 
+  return {};
 };
 
 const updateONG = async (id, ONG) => {
+  const { nome, telefone, email, endereco } = ONG;
   return {};
 };
 
