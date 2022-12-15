@@ -1,8 +1,12 @@
 const ongsModel = require('../models/ongsModel');
 
 const getAll = async (_request, response) => {
-  const ongs = await ongsModel.getAll();
-  return response.status(200).json(ongs);
+  try{
+    const ongs = await ongsModel.getAll();
+    return response.status(200).json(ongs);
+  } catch (err) {
+    return response.status(500).json(err.message);
+  }
 };
 
 const createONG = async (request, response) => {

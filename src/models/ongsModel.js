@@ -1,5 +1,8 @@
+const db = require('./database')
+
 const getAll = async () => {
-  return {};
+  const [ongs] = await db.exec('SELECT * FROM ong');
+  return ongs.rows;
 };
 
 const createONG = async (ONG) => {
