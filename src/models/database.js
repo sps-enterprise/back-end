@@ -11,15 +11,14 @@ const client = new Client({
 
 const exec = async (q, v) => {
     try{
-        client.connect();
         const res = await client.query(q, v);
-        client.end();
-        return res.rows;
+        return res;
     } catch (err){
         throw err;
     }
 };
 
 module.exports = {
-    exec
+    exec,
+    connect: () => client.connect(),
 };
