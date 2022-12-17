@@ -8,6 +8,7 @@ const getAll = async (_, response) => {
     return response.status(500).json(err.message);
   }
 };
+
 const getONG = async (request, response) => {
   const { cnpj } = request.params;
   try{
