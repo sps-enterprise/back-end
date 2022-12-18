@@ -7,6 +7,11 @@ const router = require('./routes');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 const bodyParser = require('body-parser')
+const cors = require('cors');
+
+app.use(cors({
+  origin: '*'
+}));
 
 app.use(express.json());
 
