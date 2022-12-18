@@ -11,7 +11,7 @@ const getONG = async (cnpj) => {
 } 
 
 const createONG = async (ONG) => {
-  const q = 'INSERT INTO ong(cnpj, nome, endereco, telefone, email) VALUES ($1, $2, $3, $4, $5)';
+  const q = 'INSERT INTO ong(cnpj, nome, endereco, telefone, email, password) VALUES ($1, $2, $3, $4, $5, $6)';
   await db.exec(q, Object.values(ONG));
 };
 
@@ -20,7 +20,7 @@ const deleteONG = async (cnpj) => {
 };
 
 const updateONG = async (cnpj, ONG) => {
-  const q = 'UPDATE ong SET cnpj = $1, nome = $2, endereco = $3, telefone = $4, email = $5 WHERE cnpj = $6';
+  const q = 'UPDATE ong SET cnpj = $1, nome = $2, endereco = $3, telefone = $4, email = $5, password = $6 WHERE cnpj = $7';
   const v = [...Object.values(ONG), cnpj]
   await db.exec(q, v);
 };
