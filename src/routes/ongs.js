@@ -6,14 +6,11 @@ const ongsController = require("../controllers/ongsController");
 const ongsMiddleware = require("../middlewares/ongsMiddleware");
 
 router.get("/", ongsController.getAll);
-router.post(
-  "/",
-  ongsMiddleware.validateFieldTitle,
-  ongsController.createONG
-);
-router.delete("/:id", ongsController.deleteONG);
+router.get("/:cnpj", ongsController.getONG);
+router.post("/", ongsMiddleware.validateFieldTitle, ongsController.createONG);
+router.delete("/:cnpj", ongsController.deleteONG);
 router.put(
-  "/:id",
+  "/:cnpj",
   ongsMiddleware.validateFieldTitle,
   ongsMiddleware.validateFieldStatus,
   ongsController.updateONG
