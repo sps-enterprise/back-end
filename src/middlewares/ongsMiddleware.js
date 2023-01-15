@@ -1,12 +1,20 @@
-const validateFieldTitle = (request, response, next) => {
-  next();
-};
+const validateBody = (request, response, next) => {
+  const { body } = request;
 
-const validateFieldStatus = (request, response, next) => {
+  for (const key of Object.keys(body)) {
+    if (body[key] == undefined) {
+      return response
+        .status(400)
+        .json({ message: "The field " + key + " is required" });
+    }
+    if (body[key] == "") {
+      return response.status(400).json({ message: key + " cannot be empty" });
+    }
+  }
+
   next();
 };
 
 module.exports = {
-  validateFieldTitle,
-  validateFieldStatus,
+  validateBody,
 };
