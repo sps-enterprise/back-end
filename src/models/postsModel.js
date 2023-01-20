@@ -10,6 +10,7 @@ const getPost = async (id) => {
     return post.rows;
 }
 
+//quando o crud de produto estiver pronto, post tb terá um produto
 const createPost = async (post) => {
     const dateUTC = new Date(Date.now()).toUTCString();
     const { descricao, cnpj_emp } =  post;

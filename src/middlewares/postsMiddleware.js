@@ -1,4 +1,4 @@
-const validadeBody = (request, response, next) => {
+const validateBody = (request, response, next) => {
 
     const { body } = request;
 
@@ -9,13 +9,23 @@ const validadeBody = (request, response, next) => {
         if (body[key] == "") {
             return response.status(400).json({ message: key + ' cannot be empty' });
         }
+    }    
+    next();
+};
+
+const validateCNPJ = async (request, response, next) => {
+    const { descricao, cnpj_emp } = request.body;
+
+    try{
+        const [empresa] = await empresasModel.getEmpresa(cnpj_emp);
+    } catch (err) {
+        return response.status(500).json(err.message);
     }
 
-    //verificar se o cnpj da empresa é válido
-    
     next();
 };
 
 module.exports = {
-    validadeBody,
+    validateBody,
+    validateCNPJ
 };

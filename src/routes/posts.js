@@ -7,8 +7,8 @@ const postsMiddleware = require('../middlewares/postsMiddleware');
 
 router.get('/', postsControlller.getAll);
 router.get('/:id', postsControlller.getPost);
-router.post('/', postsMiddleware.validadeBody, postsControlller.createPost);
+router.post('/', postsMiddleware.validateBody, postsMiddleware.validateCNPJ, postsControlller.createPost);
 router.delete('/:id', postsControlller.deletePost);
-router.put('/:id', postsMiddleware.validadeBody, postsControlller.updatePost);
+router.put('/:id', postsMiddleware.validateBody, postsControlller.updatePost);
 
 module.exports = router;
