@@ -1,11 +1,11 @@
 //transformar para o mesmo modelo de post e empresa
 
 const validateFieldTitle = (request, response, next) => {
-  next();
+	next();
 };
 
 const validateFieldStatus = (request, response, next) => {
-  next();
+	next();
 };
 
 module.exports = {
