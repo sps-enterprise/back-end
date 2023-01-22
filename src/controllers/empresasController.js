@@ -1,4 +1,6 @@
 const empresasModel = require('../models/empresasModel');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../config/auth');
 
 const getAll = async (_, response) => {
 	try {
@@ -21,7 +23,13 @@ const getEmpresa = async (request, response) => {
 
 const createEmpresa = async (request, response) => {
 	await empresasModel.createEmpresa(request.body);
-	return response.status(201).json();
+
+	const cnpjEmpresa = Object.values(request.body)[0]
+	const token = jwt.sign({ cnpj: cnpjEmpresa}, authConfig.secret, {
+		expiresIn: 86400,
+	});
+
+	return response.status(200).json({"token": token});
 };
 
 const deleteEmpresa = async (request, response) => {
@@ -37,10 +45,28 @@ const updateEmpresa = async (request, response) => {
 	return response.status(204).json();
 };
 
+const loginEmpresa = async (request, response) => {
+	const {email, password} = request.body;
+	const empresa = await empresasModel.getEmailEmpresa(email);
+
+	if(empresa.length === 0)
+		return response.status(400).send({ error: 'Company not found' });
+	
+	if(password !== empresa[0].password)
+		return response.status(400).send({ error: 'Invalid password' })
+	
+	const token = jwt.sign({ cnpj: empresa[0].cnpj}, authConfig.secret, {
+		expiresIn: 86400,
+	});
+	
+	return response.status(200).json({empresa, "token": token});
+};
+
 module.exports = {
 	getAll,
 	getEmpresa,
 	createEmpresa,
 	deleteEmpresa,
 	updateEmpresa,
+	loginEmpresa,
 };

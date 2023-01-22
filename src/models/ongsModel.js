@@ -10,6 +10,12 @@ const getONG = async cnpj => {
 	return ong.rows;
 };
 
+const getEmailONG = async email => {
+	const q = 'SELECT * FROM ong WHERE email = $1';
+	const r = await db.exec(q, [email]);
+	return r.rows;
+};
+
 const createONG = async ONG => {
 	const q = 'INSERT INTO ong(cnpj, nome, endereco, telefone, email, password) VALUES ($1, $2, $3, $4, $5, $6)';
 	await db.exec(q, Object.values(ONG));
@@ -31,4 +37,5 @@ module.exports = {
 	createONG,
 	deleteONG,
 	updateONG,
+	getEmailONG
 };
