@@ -7,12 +7,9 @@ const produtoMiddleware = require('../middlewares/produtoMiddleware.js');
              
 router.get('/', produtoController.getAll);
 router.get('/:id', produtoController.getProduto);
-router.post('/', produtoMiddleware.validateFieldTitle, produtoController.createProduto);
+router.post('/', produtoMiddleware.validateBody, produtoController.createProduto);
 router.delete('/:id', produtoController.deleteProduto);
-router.put('/:id',
-  produtoMiddleware.validateFieldTitle,
-  produtoMiddleware.validateFieldStatus,
-  produtoController.updateProduto,
+router.put('/:id', produtoMiddleware.validateBody, produtoController.updateProduto,
 );
 
 module.exports = router;

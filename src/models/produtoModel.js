@@ -11,7 +11,9 @@ const getProduto = async id => {
 };
 
 const createProduto = async produto => {
-	const q = 'INSERT INTO produto(id, nome, descricao, categoria, disponibilidade, listaFavoritados) VALUES ($1, $2, $3, $4, $5, $6)';
+	//neste caso, id do produto está vindo do front end
+	//listaFavoritados é em uma outra tabela
+	const q = 'INSERT INTO produto(id, nome, descricao, categoria, disponibilidade) VALUES ($1, $2, $3, $4, $5)';
 	await db.exec(q, Object.values(produto));
 };
 
@@ -20,7 +22,9 @@ const deleteProduto = async id => {
 };
 
 const updateProduto = async (id, produto) => {
-	const q = 'UPDATE produto SET id = $1, nome = $2, descricao = $3, categoria = $4, disponibilidade = $5, listaFavoritados = $6 WHERE id = $7';
+	//neste caso, id do produto pode ser trocado
+	//listaFavoritados é em uma outra tabela
+	const q = 'UPDATE produto SET id = $1, nome = $2, descricao = $3, categoria = $4, disponibilidade = $5 WHERE id = $6';
 	const v = [...Object.values(produto), id];
 	await db.exec(q, v);
 };

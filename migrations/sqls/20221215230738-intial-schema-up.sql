@@ -27,6 +27,17 @@ CREATE TABLE post (
     FOREIGN KEY (cnpj_emp) REFERENCES empresa(cnpj)
 );
 
+-- adicionar a tabela produto, com as seguintes colunas: id, nome, descricao, categoria, disponibilidade
+-- CREATE TABLE produto (
+--    id SERIAL PRIMARY KEY,
+--    nome VARCHAR(30) NOT NULL,
+--    descricao TEXT NOT NULL,
+--    categoria VARCHAR(30) NOT NULL,
+--    disponibilidade BOOLEAN NOT NULL
+--);
+
+-- adicionar uma tabela para produtos favoritados
+
 -- Doacao
 CREATE TABLE doacao (
     id SERIAL PRIMARY KEY,
