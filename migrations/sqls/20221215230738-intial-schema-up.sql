@@ -16,7 +16,8 @@ CREATE TABLE ong (
     email TEXT NOT NULL
 );
 
--- Post 
+-- Post
+-- alterar para receber um id de produto
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     descricao TEXT NOT NULL,
@@ -26,6 +27,17 @@ CREATE TABLE post (
     CONSTRAINT status_chk CHECK (status = 'deletado' OR status = 'aberto' OR status = 'finalizado'),
     FOREIGN KEY (cnpj_emp) REFERENCES empresa(cnpj)
 );
+
+-- adicionar a tabela produto, com as seguintes colunas: id, nome, descricao, categoria, disponibilidade
+-- CREATE TABLE produto (
+--    id SERIAL PRIMARY KEY,
+--    nome VARCHAR(30) NOT NULL,
+--    descricao TEXT NOT NULL,
+--    categoria VARCHAR(30) NOT NULL,
+--    disponibilidade BOOLEAN NOT NULL
+--);
+
+-- adicionar uma tabela para produtos favoritados
 
 -- Doacao
 CREATE TABLE doacao (

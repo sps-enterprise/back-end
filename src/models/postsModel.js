@@ -10,13 +10,12 @@ const getPost = async (id) => {
     return post.rows;
 }
 
-//quando o crud de produto estiver pronto, post tb terá um produto
 const createPost = async (post) => {
     const dateUTC = new Date(Date.now()).toUTCString();
-    const { descricao, cnpj_emp } =  post;
+    const { id_produto, descricao, cnpj_emp } =  post;
 
-    const q = 'INSERT INTO post(id, descricao, cnpj_emp, data_inicio, status) VALUES ($1, $2, $3, $4, $5)';
-    await db.exec(q, [1, descricao, cnpj_emp, dateUTC, 'aberto']);  //ver como gerar o id automaticamente
+    const q = 'INSERT INTO post(id, id_produto, descricao, cnpj_emp, data_inicio, status) VALUES ($1, $2, $3, $4, $5, $6)';
+    await db.exec(q, [1, id_produto, descricao, cnpj_emp, dateUTC, 'aberto']);  //ver como gerar o id automaticamente
 }
 
 const deletePost = async (id) => {
@@ -25,10 +24,10 @@ const deletePost = async (id) => {
 
 const updatePost = async (id, post) => {
     const dateUTC = new Date(Date.now()).toUTCString(); //considera que atualiza a data tb
-    const { descricao, cnpj_emp } =  post;
+    const { id_produto, descricao, cnpj_emp } =  post;
 
-    const q = 'UPDATE post SET descricao = $1, cnpj_emp = $2, data_inicio = $3, status = $4 WHERE id = $5';
-    const v = [descricao, cnpj_emp, dateUTC, 'aberto', id]; //id não muda
+    const q = 'UPDATE post SET id_produto = $1, descricao = $2, cnpj_emp = $3, data_inicio = $4, status = $5 WHERE id = $6';
+    const v = [id_produto, descricao, cnpj_emp, dateUTC, 'aberto', id]; //id não muda
     await db.exec(q, v);
 }
 

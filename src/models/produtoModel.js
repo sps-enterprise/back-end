@@ -11,6 +11,8 @@ const getProduto = async id => {
 };
 
 const createProduto = async produto => {
+	//provavelmente lista de favoritados é uma outra tabela
+	//neste caso, id do produto está vindo do front end
 	const q = 'INSERT INTO produto(id, nome, descricao, categoria, disponibilidade, listaFavoritados) VALUES ($1, $2, $3, $4, $5, $6)';
 	await db.exec(q, Object.values(produto));
 };

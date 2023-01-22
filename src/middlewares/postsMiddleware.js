@@ -14,7 +14,7 @@ const validateBody = (request, response, next) => {
 };
 
 const validateCNPJ = async (request, response, next) => {
-    const { descricao, cnpj_emp } = request.body;
+    const { id_produto, descricao, cnpj_emp } = request.body;
 
     try{
         const [empresa] = await empresasModel.getEmpresa(cnpj_emp);
@@ -25,7 +25,20 @@ const validateCNPJ = async (request, response, next) => {
     next();
 };
 
+const validateIdProduto = async (request, response, next) => {
+    const { id_produto, descricao, cnpj_emp } = request.body;
+
+    try{
+        const [produto] = await produtoModel.getProduto(id_produto);
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
+
+    next();
+};
+
 module.exports = {
     validateBody,
-    validateCNPJ
+    validateCNPJ,
+    validateIdProduto
 };
