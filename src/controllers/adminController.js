@@ -1,4 +1,6 @@
 const adminModel = require("../models/adminModel");
+const jwt = require('jsonwebtoken');
+const authConfig = require('../config/auth');
 
 const getAll = async (_, response) => {
   try {
@@ -21,7 +23,13 @@ const getAdmin = async (request, response) => {
 
 const createAdmin = async (request, response) => {
   await adminModel.createAdmin(request.body);
-  return response.status(201).json();
+
+	const emailAdmin = Object.values(request.body)[0]
+	const token = jwt.sign({ email: emailAdmin}, authConfig.secret, {
+		expiresIn: 86400,
+	});
+
+	return response.status(200).json({"token": token});
 };
 
 const deleteAdmin = async (request, response) => {
@@ -37,10 +45,28 @@ const updateAdmin = async (request, response) => {
   return response.status(204).json();
 };
 
+const loginAdmin = async (request, response) => {
+	const {email, password} = request.body;
+	const admin = await adminModel.getEmailAdmin(email);
+
+	if(admin.length === 0)
+		return response.status(400).send({ error: 'Admin not found' });
+	
+	if(password !== admin[0].password)
+		return response.status(400).send({ error: 'Invalid password' })
+	
+	const token = jwt.sign({ email: admin[0].email}, authConfig.secret, {
+		expiresIn: 86400,
+	});
+	
+	return response.status(200).json({admin, "token": token});
+};
+
 module.exports = {
   getAll,
   getAdmin,
   createAdmin,
   deleteAdmin,
   updateAdmin,
+  loginAdmin
 };
