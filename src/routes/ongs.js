@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
@@ -8,12 +8,11 @@ const ongsMiddleware = require('../middlewares/ongsMiddleware');
 
 router.get('/', ongsController.getAll);
 router.get('/:cnpj', authMiddleware, ongsController.getONG);
-router.post('/', ongsMiddleware.validateFieldTitle, ongsController.createONG);
+router.post('/', ongsMiddleware.validateBody, ongsController.createONG);
 router.delete('/:cnpj', authMiddleware, ongsController.deleteONG);
 router.put('/:cnpj',
   authMiddleware,
-  ongsMiddleware.validateFieldTitle,
-  ongsMiddleware.validateFieldStatus,
+  ongsMiddleware.validateBody,
   ongsController.updateONG,
 );
 router.post('/authenticate', ongsController.loginONG);
