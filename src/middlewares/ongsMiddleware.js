@@ -1,15 +1,21 @@
-//transformar para o mesmo modelo de post e empresa
+const validateBody = (request, response, next) => {
+  const { body } = request;
 
-const validateFieldTitle = (request, response, next) => {
-	next();
-};
+  for (const key of Object.keys(body)) {
+    if (body[key] == undefined) {
+      return response
+        .status(400)
+        .json({ message: "The field " + key + " is required" });
+    }
+    if (body[key] == "") {
+      return response.status(400).json({ message: key + " cannot be empty" });
+    }
+  }
 
-const validateFieldStatus = (request, response, next) => {
-	next();
+  next();
 };
 
 module.exports = {
-  validateFieldTitle,
-  validateFieldStatus
+  validateBody,
 };
   
