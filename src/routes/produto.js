@@ -12,5 +12,15 @@ router.post('/', authMiddleware, produtoMiddleware.validateBody, produtoControll
 router.delete('/:id', authMiddleware, produtoController.deleteProduto);
 router.put('/:id', authMiddleware, produtoMiddleware.validateBody, produtoController.updateProduto,
 );
+router.put('/:id', 
+  authMiddleware, 
+  produtoMiddleware.validateBody, //precisa verificar se o id_produto e cpnj_ong são válidos?
+  produtoController.addFavorito,
+);
+router.delete('/:id', 
+  authMiddleware, 
+  produtoMiddleware.validateBody, //precisa verificar se o id_produto e cpnj_ong são válidos?
+  produtoController.removeFavorito,
+);
 
 module.exports = router;

@@ -43,7 +43,15 @@ CREATE TABLE post (
 --    disponibilidade BOOLEAN NOT NULL
 --);
 
--- adicionar uma tabela para produtos favoritados
+-- adicionar uma tabela para produtos favoritados (semelhante à interesse_post),
+-- com as seguintes colunas: cnpj_ong, id_produto, data_favorito
+-- CREATE TABLE favoritos (
+--    cnpj_ong CHAR(14) NOT NULL,
+--    id_produto int NOT NULL,
+--    data_favorito DATE NOT NULL,
+--    FOREIGN KEY (cnpj_ong) REFERENCES ong(cpnj),
+--    FOREIGN KEY (id_produto) REFERENCES produto(id)
+--);
 
 -- Doacao
 CREATE TABLE doacao (
