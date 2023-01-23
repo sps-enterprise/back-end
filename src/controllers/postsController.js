@@ -38,9 +38,9 @@ const updatePost = async (request, response) => {
 }
 
 const addInteresse = async (request, response) => {
-    const { id_post } = request.params;
+    const { id } = request.params;
 
-    await postsModel.addInteresse(id_post, request.body);
+    await postsModel.addInteresse(id, request.body);
 
     //notificar empresa
 
@@ -48,10 +48,10 @@ const addInteresse = async (request, response) => {
 }
 
 const removeInteresse = async (request, response) => {
-    const { id_post } = request.params;
+    const { id } = request.params;
 
     //e se não houver este interesse?
-    await postsModel.removeInteresse(id_post, request.body);
+    await postsModel.removeInteresse(id, request.body);
 
     //remover notificação?
 
