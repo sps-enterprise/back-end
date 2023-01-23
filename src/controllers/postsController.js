@@ -37,10 +37,33 @@ const updatePost = async (request, response) => {
     return response.status(204).json();
 }
 
+const addInteresse = async (request, response) => {
+    const { id_post } = request.params;
+
+    await postsModel.addInteresse(id_post, request.body);
+
+    //notificar empresa
+
+    return response.status(204).json();
+}
+
+const removeInteresse = async (request, response) => {
+    const { id_post } = request.params;
+
+    //e se não houver este interesse?
+    await postsModel.removeInteresse(id_post, request.body);
+
+    //remover notificação?
+
+    return response.status(204).json();
+}
+
 module.exports = {
     getAll,
     getPost,
     createPost,
     deletePost,
     updatePost,
+    addInteresse,
+    removeInteresse,
 };
