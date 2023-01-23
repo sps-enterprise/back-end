@@ -20,8 +20,12 @@ const getONG = async (request, response) => {
 };
 
 const createONG = async (request, response) => {
-	await ongsModel.createONG(request.body);
-	return response.status(201).json();
+	try {
+		await ongsModel.createONG(request.body);
+		return response.status(201).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteONG = async (request, response) => {
