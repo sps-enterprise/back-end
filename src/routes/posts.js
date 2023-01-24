@@ -11,7 +11,7 @@ router.get('/:id', postsControlller.getPost);
 router.post('/', 
   authMiddleware, 
   postsMiddleware.validateBody, 
-  postsMiddleware.validateCNPJ, 
+  postsMiddleware.validateCNPJEmpresa, 
   postsMiddleware.validateIdProduto, 
   postsControlller.createPost,
 );
@@ -19,18 +19,18 @@ router.delete('/:id', authMiddleware, postsControlller.deletePost);
 router.put('/:id', 
   authMiddleware,
   postsMiddleware.validateBody, 
-  postsMiddleware.validateCNPJ, 
+  postsMiddleware.validateCNPJEmpresa, 
   postsMiddleware.validateIdProduto, 
   postsControlller.updatePost,
 );
 router.put('/:id', //é realmente put ou é post?
   authMiddleware,
-  postsMiddleware.validateBody,  //precisa verificar se o id_post e cpnj_ong são válidos?
+  postsMiddleware.validateBody,
   postsControlller.addInteresse,
 );
 router.delete('/:id',
   authMiddleware,
-  postsMiddleware.validateBody,  //precisa verificar se o id_post e cpnj_ong são válidos?
+  postsMiddleware.validateBody,
   postsControlller.removeInteresse,
 );
 

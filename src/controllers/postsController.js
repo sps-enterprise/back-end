@@ -40,22 +40,25 @@ const updatePost = async (request, response) => {
 const addInteresse = async (request, response) => {
     const { id } = request.params;
 
-    await postsModel.addInteresse(id, request.body);
-
-    //notificar empresa
-
-    return response.status(204).json();
+    try {
+        await postsModel.addInteresse(id, request.body);
+        //notificar empresa
+        return response.status(204).json();
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }    
 }
 
 const removeInteresse = async (request, response) => {
     const { id } = request.params;
 
-    //e se não houver este interesse?
-    await postsModel.removeInteresse(id, request.body);
-
-    //remover notificação?
-
-    return response.status(204).json();
+    try {
+        await postsModel.removeInteresse(id, request.body);
+        //remover notificação?
+        return response.status(204).json();
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
 }
 
 module.exports = {
