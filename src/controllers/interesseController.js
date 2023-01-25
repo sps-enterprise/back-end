@@ -1,5 +1,25 @@
 const interesseModel = require('../models/interesseModel');
 
+const getInteresse = async (request, response) => {
+    const { id } = request.params;
+    try {
+        const [interesse] = await interesseModel.getInteresse(id, request.body);        
+        return response.status(200).json(interesse);
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
+};
+
+const getInteresseByEmpresa = async (request, response) => {
+    const { cnpj } = request.params;
+    try {
+        const [interesses] = await interesseModel.getInteresseByEmpresa(cnpj);        
+        return response.status(200).json(interesses);
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
+};
+
 const addInteresse = async (request, response) => {
     const { id } = request.params;
 
@@ -10,7 +30,7 @@ const addInteresse = async (request, response) => {
     } catch (err) {
         return response.status(500).json(err.message);
     }    
-}
+};
 
 const removeInteresse = async (request, response) => {
     const { id } = request.params;
@@ -22,9 +42,11 @@ const removeInteresse = async (request, response) => {
     } catch (err) {
         return response.status(500).json(err.message);
     }
-}
+};
 
 module.exports = {
+    getInteresse,
+    getInteresseByEmpresa,
     addInteresse,
     removeInteresse,
 };
