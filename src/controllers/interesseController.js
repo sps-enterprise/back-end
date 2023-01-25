@@ -24,8 +24,11 @@ const addInteresse = async (request, response) => {
     const { id } = request.params;
 
     try {
-        await postsModel.addInteresse(id, request.body);
-        //notificar empresa
+        const [interesse] = await interesseModel.getInteresse(id, request.body);
+        if (interesse.length == 0) {
+            await postsModel.addInteresse(id, request.body);
+            //notificar empresa
+        }
         return response.status(204).json();
     } catch (err) {
         return response.status(500).json(err.message);
