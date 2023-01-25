@@ -7,5 +7,6 @@ router.use('/empresas/', require('./empresas'));
 router.use("/admin/", require("./admin"));
 router.use('/posts/', require('./posts'));
 router.use('/produto/', require('./produto'));
+router.use('/interesse/', require('./interesse'));
 
 module.exports = router;

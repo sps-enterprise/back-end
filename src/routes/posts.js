@@ -23,15 +23,5 @@ router.put('/:id',
   postsMiddleware.validateIdProduto, 
   postsControlller.updatePost,
 );
-router.put('/:id', //é realmente put ou é post?
-  authMiddleware,
-  postsMiddleware.validateBody,
-  postsControlller.addInteresse,
-);
-router.delete('/:id',
-  authMiddleware,
-  postsMiddleware.validateBody,
-  postsControlller.removeInteresse,
-);
 
 module.exports = router;
