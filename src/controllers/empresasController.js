@@ -20,8 +20,12 @@ const getEmpresa = async (request, response) => {
 };
 
 const createEmpresa = async (request, response) => {
-	await empresasModel.createEmpresa(request.body);
-	return response.status(201).json();
+	try {
+		await empresasModel.createEmpresa(request.body);
+		return response.status(201).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteEmpresa = async (request, response) => {
