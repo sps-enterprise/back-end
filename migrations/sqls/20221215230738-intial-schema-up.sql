@@ -59,6 +59,7 @@ CREATE TABLE doacao (
 );
 
 -- Interesse Post
+-- adicionar cnpj_emp para facilitar consultas dos interesses para a empresa
 CREATE TABLE interesse_post (
     cnpj_ong char(14) NOT NULL,
     id_post int NOT NULL,
