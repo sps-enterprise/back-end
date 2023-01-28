@@ -24,6 +24,12 @@ Set the database config at the `.env` file:
 - `POSTGRES_PASSWORD` : user's password
 - `POSTGRES_DATABASE` : database
 
+If you want to create a local database instance using docker, then call:
+
+```
+docker-compose up
+```
+
 To run migrations, first install `db-migrate` and `db-mgirate-pg` globally:
 
 ```

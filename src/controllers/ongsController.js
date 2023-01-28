@@ -24,14 +24,19 @@ const getONG = async (request, response) => {
 };
 
 const createONG = async (request, response) => {
-	await ongsModel.createONG(request.body);
+  try {
+    await ongsModel.createONG(request.body);
 
-	const cnpjONG = Object.values(request.body)[0]
-	const token = jwt.sign({ cnpj: cnpjONG}, authConfig.secret, {
-		expiresIn: 86400,
-	});
+    const cnpjONG = Object.values(request.body)[0]
+    const token = jwt.sign({ cnpj: cnpjONG}, authConfig.secret, {
+      expiresIn: 86400,
+    });
 
-	return response.status(200).json({"token": token});
+    return response.status(200).json({"token": token});
+  
+  } catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteONG = async (request, response) => {
