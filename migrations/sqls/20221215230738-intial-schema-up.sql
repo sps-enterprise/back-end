@@ -22,7 +22,8 @@ CREATE TABLE ong (
 --    email TEXT NOT NULL
 --);
 
--- Post 
+-- Post
+-- alterar para receber um id de produto
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     descricao TEXT NOT NULL,
