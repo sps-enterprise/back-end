@@ -22,14 +22,19 @@ const getEmpresa = async (request, response) => {
 };
 
 const createEmpresa = async (request, response) => {
-	await empresasModel.createEmpresa(request.body);
+  try{
+    await empresasModel.createEmpresa(request.body);
 
-	const cnpjEmpresa = Object.values(request.body)[0]
-	const token = jwt.sign({ cnpj: cnpjEmpresa}, authConfig.secret, {
-		expiresIn: 86400,
-	});
-
-	return response.status(200).json({"token": token});
+    const cnpjEmpresa = Object.values(request.body)[0]
+    const token = jwt.sign({ cnpj: cnpjEmpresa}, authConfig.secret, {
+      expiresIn: 86400,
+    });
+  
+	  return response.status(200).json({"token": token});
+  
+  } catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteEmpresa = async (request, response) => {
