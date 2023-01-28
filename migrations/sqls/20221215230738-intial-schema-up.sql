@@ -16,6 +16,12 @@ CREATE TABLE ong (
     email TEXT NOT NULL
 );
 
+-- adicionar a tabela administrador, com as seguintes colunas: nome, email, password
+-- CREATE TABLE admin (
+--    nome TEXT PRIMARY KEY,
+--    email TEXT NOT NULL
+--);
+
 -- Post 
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,

@@ -10,6 +10,12 @@ const getEmpresa = async cnpj => {
 	return empresa.rows;
 };
 
+const getEmailEmpresa = async email => {
+	const q = 'SELECT * FROM empresa WHERE email = $1';
+	const r = await db.exec(q, [email]);
+	return r.rows;
+};
+
 const createEmpresa = async empresa => {
 	const q = 'INSERT INTO empresa(cnpj, nome, endereco, telefone, email, password) VALUES ($1, $2, $3, $4, $5, $6)';
 	await db.exec(q, Object.values(empresa));
@@ -31,4 +37,5 @@ module.exports = {
 	createEmpresa,
 	deleteEmpresa,
 	updateEmpresa,
+	getEmailEmpresa,
 };
