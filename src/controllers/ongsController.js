@@ -26,9 +26,10 @@ const getONG = async (request, response) => {
 const createONG = async (request, response) => {
   try {
     await ongsModel.createONG(request.body);
+	const ong = ongsModel.getONG(Object.values(request.body)[0]);
 
-    const cnpjONG = Object.values(request.body)[0]
-    const token = jwt.sign({ cnpj: cnpjONG}, authConfig.secret, {
+	delete ong[0].password;
+	const token = jwt.sign({ ong: ong[0]}, authConfig.secret, {
       expiresIn: 86400,
     });
 
@@ -62,11 +63,11 @@ const loginONG = async (request, response) => {
 	if(password !== ong[0].password)
 		return response.status(400).send({ error: 'Invalid password' })
 	
+	delete ong[0].password;
 	const token = jwt.sign({ ong: ong[0]}, authConfig.secret, {
 		expiresIn: 86400,
 	});
 	
-	delete ong[0].password;
 	return response.status(200).json({ong, "token": token});
 };
 
