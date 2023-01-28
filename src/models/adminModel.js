@@ -10,6 +10,13 @@ const getAdmin = async (email) => {
   return admin.rows;
 };
 
+//precisa mesmo?
+const getEmailAdmin = async (email) => {
+	const q = 'SELECT * FROM admin WHERE email = $1';
+	const r = await db.exec(q, [email]);
+	return r.rows;
+};
+
 const createAdmin = async (admin) => {
   const q = "INSERT INTO admin(nome, email, password) VALUES ($1, $2, $3)";
   await db.exec(q, Object.values(admin));
@@ -31,4 +38,5 @@ module.exports = {
   createAdmin,
   deleteAdmin,
   updateAdmin,
+  getEmailAdmin
 };
