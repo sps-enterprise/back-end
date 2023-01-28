@@ -62,7 +62,7 @@ const loginONG = async (request, response) => {
 	if(password !== ong[0].password)
 		return response.status(400).send({ error: 'Invalid password' })
 	
-	const token = jwt.sign({ cnpj: ong[0].cnpj}, authConfig.secret, {
+	const token = jwt.sign({ ong: ong[0]}, authConfig.secret, {
 		expiresIn: 86400,
 	});
 	

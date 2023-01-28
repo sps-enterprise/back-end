@@ -60,7 +60,7 @@ const loginEmpresa = async (request, response) => {
 	if(password !== empresa[0].password)
 		return response.status(400).send({ error: 'Invalid password' })
 	
-	const token = jwt.sign({ cnpj: empresa[0].cnpj}, authConfig.secret, {
+	const token = jwt.sign({ empresa: empresa[0]}, authConfig.secret, {
 		expiresIn: 86400,
 	});
 	
