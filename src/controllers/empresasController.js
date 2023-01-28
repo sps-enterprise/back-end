@@ -51,8 +51,8 @@ const updateEmpresa = async (request, response) => {
 };
 
 const loginEmpresa = async (request, response) => {
-	const {email, password} = request.body;
-	const empresa = await empresasModel.getEmailEmpresa(email);
+	const {cnpj, password} = request.body;
+	const empresa = await empresasModel.getEmpresa(cnpj);
 
 	if(empresa.length === 0)
 		return response.status(400).send({ error: 'Company not found' });
@@ -64,6 +64,7 @@ const loginEmpresa = async (request, response) => {
 		expiresIn: 86400,
 	});
 	
+	delete empresa[0].password;
 	return response.status(200).json({empresa, "token": token});
 };
 

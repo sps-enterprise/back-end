@@ -53,8 +53,8 @@ const updateONG = async (request, response) => {
 };
 
 const loginONG = async (request, response) => {
-	const {email, password} = request.body;
-	const ong = await ongsModel.getEmailONG(email);
+	const {cnpj, password} = request.body;
+	const ong = await ongsModel.getONG(cnpj);
 
 	if(ong.length === 0)
 		return response.status(400).send({ error: 'ONG not found' });
@@ -66,6 +66,7 @@ const loginONG = async (request, response) => {
 		expiresIn: 86400,
 	});
 	
+	delete ong[0].password;
 	return response.status(200).json({ong, "token": token});
 };
 
