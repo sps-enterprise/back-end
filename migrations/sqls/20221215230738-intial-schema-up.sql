@@ -59,7 +59,7 @@ CREATE TABLE doacao (
 );
 
 -- Interesse Post
--- adicionar cnpj_emp para facilitar consultas dos interesses para a empresa
+-- adicionar a coluna: status VARCHAR(10) (status = 'aberto' OR status = 'aceito' OR status = 'rejeitado')
 CREATE TABLE interesse_post (
     cnpj_ong char(14) NOT NULL,
     id_post int NOT NULL,

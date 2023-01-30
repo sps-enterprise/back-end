@@ -26,3 +26,13 @@ router.delete('/:id',
   interesseMiddleware.validateBody,
   interesseController.removeInteresse,
 );
+router.put('/aceitar/:id',
+  authMiddleware,
+  interesseMiddleware.validateBody,
+  interesseController.aceitarInteresse,
+);
+router.put('/rejeitar/:id',
+  authMiddleware,
+  interesseMiddleware.validateBody,
+  interesseController.rejeitarInteresse,
+);
