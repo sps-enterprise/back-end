@@ -20,21 +20,32 @@ const getPost = async (request, response) => {
 }
 
 const createPost = async (request, response) => {
-    const createdPost = await postsModel.createPost(request.body);
-    return response.status(201).json();
+    try{
+        await postsModel.createPost(request.body);
+        return response.status(201).json();
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
 }
 
 const deletePost = async (request, response) => {
     const { id } = request.params;
-    await postsModel.deletePost(id);
-    return response.status(204).json();
+    try {
+        await postsModel.deletePost(id);
+        return response.status(204).json();
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
 }
 
 const updatePost = async (request, response) => {
     const { id } = request.params;
-
-    await postsModel.updatePost(id, request.body);
-    return response.status(204).json();
+    try{
+        await postsModel.updatePost(id, request.body);
+        return response.status(204).json();
+    } catch (err) {
+        return response.status(500).json(err.message);
+    }
 }
 
 module.exports = {
