@@ -6,7 +6,7 @@ const getAll = async () => {
 };
 
 const getAdmin = async (email) => {
-  const admin = await db.exec("SELECT * FROM admin WHERE email = $2", [email]);
+  const admin = await db.exec("SELECT * FROM admin WHERE email = $1", [email]);
   return admin.rows;
 };
 
@@ -23,12 +23,11 @@ const createAdmin = async (admin) => {
 };
 
 const deleteAdmin = async (email) => {
-  await db.exec("DELETE FROM admin WHERE email = $2", [email]);
+  await db.exec("DELETE FROM admin WHERE email = $1", [email]);
 };
 
 const updateAdmin = async (email, admin) => {
-  const q =
-    "UPDATE admin SET nome = $1,email = $2, password = $3 WHERE email = $7"; // alterei, mas ão sei se fez sentido
+  const q = "UPDATE admin SET nome = $1, email = $2, password = $3 WHERE email = $4";
   const v = [...Object.values(admin), email];
   await db.exec(q, v);
 };

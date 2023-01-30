@@ -24,14 +24,20 @@ const getONG = async (request, response) => {
 };
 
 const createONG = async (request, response) => {
-	await ongsModel.createONG(request.body);
+  try {
+    await ongsModel.createONG(request.body);
+	const ong = ongsModel.getONG(Object.values(request.body)[0]);
 
-	const cnpjONG = Object.values(request.body)[0]
-	const token = jwt.sign({ cnpj: cnpjONG}, authConfig.secret, {
-		expiresIn: 86400,
-	});
+	delete ong[0].password;
+	const token = jwt.sign({ ong: ong[0]}, authConfig.secret, {
+      expiresIn: 86400,
+    });
 
-	return response.status(200).json({"token": token});
+    return response.status(200).json({"token": token});
+  
+  } catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteONG = async (request, response) => {
@@ -48,8 +54,8 @@ const updateONG = async (request, response) => {
 };
 
 const loginONG = async (request, response) => {
-	const {email, password} = request.body;
-	const ong = await ongsModel.getEmailONG(email);
+	const {cnpj, password} = request.body;
+	const ong = await ongsModel.getONG(cnpj);
 
 	if(ong.length === 0)
 		return response.status(400).send({ error: 'ONG not found' });
@@ -57,7 +63,8 @@ const loginONG = async (request, response) => {
 	if(password !== ong[0].password)
 		return response.status(400).send({ error: 'Invalid password' })
 	
-	const token = jwt.sign({ cnpj: ong[0].cnpj}, authConfig.secret, {
+	delete ong[0].password;
+	const token = jwt.sign({ ong: ong[0]}, authConfig.secret, {
 		expiresIn: 86400,
 	});
 	

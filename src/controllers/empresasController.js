@@ -22,14 +22,20 @@ const getEmpresa = async (request, response) => {
 };
 
 const createEmpresa = async (request, response) => {
-	await empresasModel.createEmpresa(request.body);
-
-	const cnpjEmpresa = Object.values(request.body)[0]
-	const token = jwt.sign({ cnpj: cnpjEmpresa}, authConfig.secret, {
-		expiresIn: 86400,
-	});
-
-	return response.status(200).json({"token": token});
+  try{
+    await empresasModel.createEmpresa(request.body);
+	const empresa = empresasModel.getEmpresa(Object.values(request.body)[0]);
+    
+	delete empresa[0].password;
+	const token = jwt.sign({ empresa: empresa[0]}, authConfig.secret, {
+      expiresIn: 86400,
+    });
+  
+	  return response.status(200).json({"token": token});
+  
+  } catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteEmpresa = async (request, response) => {
@@ -46,8 +52,8 @@ const updateEmpresa = async (request, response) => {
 };
 
 const loginEmpresa = async (request, response) => {
-	const {email, password} = request.body;
-	const empresa = await empresasModel.getEmailEmpresa(email);
+	const {cnpj, password} = request.body;
+	const empresa = await empresasModel.getEmpresa(cnpj);
 
 	if(empresa.length === 0)
 		return response.status(400).send({ error: 'Company not found' });
@@ -55,7 +61,8 @@ const loginEmpresa = async (request, response) => {
 	if(password !== empresa[0].password)
 		return response.status(400).send({ error: 'Invalid password' })
 	
-	const token = jwt.sign({ cnpj: empresa[0].cnpj}, authConfig.secret, {
+	delete empresa[0].password;
+	const token = jwt.sign({ empresa: empresa[0]}, authConfig.secret, {
 		expiresIn: 86400,
 	});
 	
