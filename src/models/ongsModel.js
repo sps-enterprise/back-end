@@ -10,15 +10,16 @@ const getONG = async (cnpj) => {
   return ong.rows;
 };
 
-const getEmailONG = async email => {
-	const q = 'SELECT * FROM ong WHERE email = $1';
-	const r = await db.exec(q, [email]);
-	return r.rows;
+const getEmailONG = async (email) => {
+  const q = "SELECT * FROM ong WHERE email = $1";
+  const r = await db.exec(q, [email]);
+  return r.rows;
 };
 
-const createONG = async ONG => {
-	const q = 'INSERT INTO ong(cnpj, nome, endereco, telefone, email, password) VALUES ($1, $2, $3, $4, $5, $6)';
-	await db.exec(q, Object.values(ONG));
+const createONG = async (ONG) => {
+  const q =
+    "INSERT INTO ong(cnpj, nome, endereco, telefone, email, password, slogan, historia, missao, atividades) VALUES ($1, $2, $3, $4, $5, $6)";
+  await db.exec(q, Object.values(ONG));
 };
 
 const deleteONG = async (cnpj) => {
@@ -27,16 +28,16 @@ const deleteONG = async (cnpj) => {
 
 const updateONG = async (cnpj, ONG) => {
   const q =
-    "UPDATE ong SET cnpj = $1, nome = $2, endereco = $3, telefone = $4, email = $5, password = $6 WHERE cnpj = $7";
+    "UPDATE ong SET cnpj = $1, nome = $2, endereco = $3, telefone = $4, email = $5, password = $6, slogan = $7, historia = $8, missao = $9, atividades = $10 WHERE cnpj = $11";
   const v = [...Object.values(ONG), cnpj];
   await db.exec(q, v);
 };
 
 module.exports = {
-	getAll,
-	getONG,
-	createONG,
-	deleteONG,
-	updateONG,
-	getEmailONG
+  getAll,
+  getONG,
+  createONG,
+  deleteONG,
+  updateONG,
+  getEmailONG,
 };
