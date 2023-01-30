@@ -67,3 +67,12 @@ CREATE TABLE interesse_post (
     FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
     FOREIGN KEY (id_post) REFERENCES post(id) 
 );
+
+-- Adicionar a tabela notificação
+--CREATE TABLE notificacao (
+--    id SERIAL PRIMARY KEY,
+--    cnpj char(14) NOT NULL,
+--    mensagem TEXT NOT NULL,
+--    lida BOOLEAN NOT NULL,
+--    FOREIGN KEY (cnpj) REFERENCES ong(cnpj) OR empresa(cnpj)
+--);

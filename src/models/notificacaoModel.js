@@ -6,12 +6,12 @@ const getNotificacoes = async (cnpj) => {
 };
 
 const addNotificacao = async (cnpj, mensagem) => {
-    const q = 'INSERT INTO notificacao(id, cnpj, mensagem, status) VALUES ($1, $2, $3, $4)';
-    await db.exec(q, [1, cnpj, mensagem, 'nao_lida']);   //ver como gerar o id automaticamente
+    const q = 'INSERT INTO notificacao(id, cnpj, mensagem, lida) VALUES ($1, $2, $3, $4)';
+    await db.exec(q, [1, cnpj, mensagem, false]);   //ver como gerar o id automaticamente
 };
 
 const readNotificacao = async (id) => {
-    await db.exec('UPDATE notificacao SET status = $1 WHERE id = $2', ['lida', id]);
+    await db.exec('UPDATE notificacao SET lida = $1 WHERE id = $2', [true, id]);
 };
 
 const removeNotificacao = async (id) => {
