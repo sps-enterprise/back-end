@@ -1,17 +1,27 @@
 const validateBody = (request, response, next) => {
   const { body } = request;
 
-  for (const key of Object.keys(body)) {
-    if (body[key] == undefined) {
-      return response
-        .status(400)
-        .json({ message: "The field " + key + " is required" });
-    }
-    if (body[key] == "") {
-      return response.status(400).json({ message: key + " cannot be empty" });
-    }
+  if(!body['cnpj']) {
+    return response
+      .status(400)
+      .json({ message: "The field cnpj is required" });
   }
-
+  if(!body['nome']) {
+    return response
+      .status(400)
+      .json({ message: "The field nome is required" });
+  }
+  if(!body['telefone']) {
+    return response
+      .status(400)
+      .json({ message: "The field telefone is required" });
+  }
+  if(!body['email']) {
+    return response
+      .status(400)
+      .json({ message: "The field email is required" });
+  }
+  
   next();
 };
 
