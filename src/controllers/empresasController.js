@@ -39,22 +39,33 @@ const createEmpresa = async (request, response) => {
 };
 
 const deleteEmpresa = async (request, response) => {
-	const {cnpj} = request.params;
-	await empresasModel.deleteEmpresa(cnpj);
-	return response.status(204).json();
+	try {
+		const {cnpj} = request.params;
+		await empresasModel.deleteEmpresa(cnpj);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const updateEmpresa = async (request, response) => {
-	const {cnpj} = request.params;
-
-	await empresasModel.updateEmpresa(cnpj, request.body);
-	return response.status(204).json();
+	try {
+		const {cnpj} = request.params;
+		await empresasModel.updateEmpresa(cnpj, request.body);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const loginEmpresa = async (request, response) => {
 	const {cnpj, password} = request.body;
-	const empresa = await empresasModel.getEmpresa(cnpj);
-
+	try {
+		const empresa = await empresasModel.getEmpresa(cnpj);
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
+	
 	if(empresa.length === 0)
 		return response.status(400).send({ error: 'Company not found' });
 	
