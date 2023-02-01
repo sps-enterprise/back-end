@@ -1,7 +1,10 @@
 const db = require('./database');
+const query = require('../util/query');
 
-const getAll = async () => {
-    const posts = await db.exec('SELECT * FROM post');
+const getAll = async (filters) => {
+    let q = 'SELECT * FROM post';
+    q = query.where(q, filters);
+    const posts = await db.exec(q);
     return posts.rows;
 }
 
