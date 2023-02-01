@@ -41,22 +41,33 @@ const createONG = async (request, response) => {
 };
 
 const deleteONG = async (request, response) => {
-	const {cnpj} = request.params;
-	await ongsModel.deleteONG(cnpj);
-	return response.status(204).json();
+	try {
+		const {cnpj} = request.params;
+		await ongsModel.deleteONG(cnpj);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const updateONG = async (request, response) => {
-	const {cnpj} = request.params;
-
-	await ongsModel.updateONG(cnpj, request.body);
-	return response.status(204).json();
+	try {
+		const {cnpj} = request.params;
+		await ongsModel.updateONG(cnpj, request.body);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const loginONG = async (request, response) => {
 	const {cnpj, password} = request.body;
-	const ong = await ongsModel.getONG(cnpj);
-
+	try {
+		const ong = await ongsModel.getONG(cnpj);
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
+	
 	if(ong.length === 0)
 		return response.status(400).send({ error: 'ONG not found' });
 	

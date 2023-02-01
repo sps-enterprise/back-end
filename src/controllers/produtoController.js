@@ -20,21 +20,32 @@ const getProduto = async (request, response) => {
 };
 
 const createProduto = async (request, response) => {
-	await produtoModel.createProduto(request.body);
-	return response.status(201).json();
+	try {
+		await produtoModel.createProduto(request.body);
+		return response.status(201).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const deleteProduto = async (request, response) => {
-	const {id} = request.params;
-	await produtoModel.deleteProduto(id);
-	return response.status(204).json();
+	try {
+		const {id} = request.params;
+		await produtoModel.deleteProduto(id);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 const updateProduto = async (request, response) => {
-	const {id} = request.params;
-
-	await produtoModel.updateProduto(id, request.body);
-	return response.status(204).json();
+	try {
+		const {id} = request.params;
+		await produtoModel.updateProduto(id, request.body);
+		return response.status(204).json();
+	} catch (err) {
+		return response.status(500).json(err.message);
+	}
 };
 
 module.exports = {
