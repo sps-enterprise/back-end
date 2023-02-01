@@ -1,9 +1,9 @@
 const postsModel = require('../models/postsModel');
 
-const getAll = async (_, response) => {
+const getAll = async (request, response) => {
     try {
-        const posts = await postsModel.getAll();
-        return response.status(200).json(posts);    
+        const posts = await postsModel.getAll(request.query);
+        return response.status(200).json(posts);  
     } catch (err) {
         return response.status(500).json(err.message);
     }
