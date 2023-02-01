@@ -1,0 +1,9 @@
+ALTER TABLE empresa DROP COLUMN slogan;
+ALTER TABLE empresa DROP COLUMN historia;
+ALTER TABLE empresa DROP COLUMN missao;
+ALTER TABLE empresa DROP COLUMN atividades;
+
+ALTER TABLE ong DROP COLUMN slogan;
+ALTER TABLE ong DROP COLUMN historia;
+ALTER TABLE ong DROP COLUMN missao;
+ALTER TABLE ong DROP COLUMN atividades;
