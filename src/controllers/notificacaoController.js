@@ -1,9 +1,9 @@
 const notificacaoModel = require('../models/notificacaoModel');
 
-const getNotificacoes = async (request, response) => {
+const getNotificacoesByEmpresa = async (request, response) => {
     const { cnpj } = request.params;
     try {
-        const [notificacoes] = await notificacaoModel.getNotificacoes(cnpj);        
+        const [notificacoes] = await notificacaoModel.getNotificacoesByEmpresa(cnpj);        
         return response.status(200).json(notificacoes);
     } catch (err) {
         return response.status(500).json(err.message);
@@ -11,11 +11,8 @@ const getNotificacoes = async (request, response) => {
 };
 
 const addNotificacao = async (request, response) => {
-    const { cnpj } = request.params;
-    const { mensagem } = request.body;
-
     try {
-        await notificacaoModel.addNotificacao(cnpj, mensagem);
+        await notificacaoModel.addNotificacao(request.body);
         return response.status(200).json();
     } catch (err) {
         return response.status(500).json(err.message);
@@ -43,7 +40,7 @@ const removeNotificacao = async (request, response) => {
 };
 
 module.exports = {
-    getNotificacoes,
+    getNotificacoesByEmpresa,
     addNotificacao,
     readNotificacao,
     removeNotificacao,

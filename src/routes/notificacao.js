@@ -9,9 +9,9 @@ const authMiddleware = require('../middlewares/authMiddleware');
 router.get('/:cnpj',
   authMiddleware,
   notificacaoMiddleware.validateBody,
-  notificacaoController.getNotificacoes,
+  notificacaoController.getNotificacoesByEmpresa,
 );
-router.post('/:cnpj',
+router.post(
   authMiddleware,
   notificacaoMiddleware.validateBody,
   notificacaoController.addNotificacao,

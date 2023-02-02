@@ -1,25 +1,28 @@
 const db = require('./database');
 
-const getNotificacoes = async (cnpj) => {
-    const notificacoes = await db.exec('SELECT * FROM notificacao WHERE cnpj = $1', [cnpj]);
+const getNotificacoesByEmpresa = async (cnpj_emp) => {
+    const notificacoes = await db.exec('SELECT * FROM notificacao_interesse WHERE cnpj_emp = $1', [cnpj_emp]);
     return notificacoes.rows;
 };
 
-const addNotificacao = async (cnpj, mensagem) => {
-    const q = 'INSERT INTO notificacao(id, cnpj, mensagem, lida) VALUES ($1, $2, $3, $4)';
-    await db.exec(q, [1, cnpj, mensagem, false]);   //ver como gerar o id automaticamente
+const addNotificacao = async (notificacao) => {
+    const dateUTC = new Date(Date.now()).toUTCString();
+    const { cnpj_emp, cnpj_ong, id_post, mensagem } = notificacao;
+
+    const q = 'INSERT INTO notificacao_interesse(cnpj_emp, cnpj_ong, id_post, data, mensagem, lida) VALUES ($1, $2, $3, $4, $5, $6)';
+    await db.exec(q, [cnpj_emp, cnpj_ong, id_post, dateUTC, mensagem, false]);
 };
 
 const readNotificacao = async (id) => {
-    await db.exec('UPDATE notificacao SET lida = $1 WHERE id = $2', [true, id]);
+    await db.exec('UPDATE notificacao_interesse SET lida = $1 WHERE id = $2', [true, id]);
 };
 
 const removeNotificacao = async (id) => {
-    await db.exec('DELETE FROM notificacao WHERE id = $1', [id]);
+    await db.exec('DELETE FROM notificacao_interesse WHERE id = $1', [id]);
 };
 
 module.exports = {
-    getNotificacoes,
+    getNotificacoesByEmpresa,
     addNotificacao,
     readNotificacao,
     removeNotificacao,
