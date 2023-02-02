@@ -16,14 +16,7 @@ CREATE TABLE ong (
     email TEXT NOT NULL
 );
 
--- adicionar a tabela administrador, com as seguintes colunas: nome, email, password
--- CREATE TABLE admin (
---    nome TEXT PRIMARY KEY,
---    email TEXT NOT NULL
---);
-
 -- Post
--- alterar para receber um id de produto
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     descricao TEXT NOT NULL,
@@ -33,25 +26,6 @@ CREATE TABLE post (
     CONSTRAINT status_chk CHECK (status = 'deletado' OR status = 'aberto' OR status = 'finalizado'),
     FOREIGN KEY (cnpj_emp) REFERENCES empresa(cnpj)
 );
-
--- adicionar a tabela produto, com as seguintes colunas: id, nome, descricao, categoria, disponibilidade
--- CREATE TABLE produto (
---    id SERIAL PRIMARY KEY,
---    nome VARCHAR(30) NOT NULL,
---    descricao TEXT NOT NULL,
---    categoria VARCHAR(30) NOT NULL,
---    disponibilidade BOOLEAN NOT NULL
---);
-
--- adicionar uma tabela para produtos favoritados (semelhante à interesse_post),
--- com as seguintes colunas: cnpj_ong, id_produto, data_favorito
--- CREATE TABLE favoritos (
---    cnpj_ong CHAR(14) NOT NULL,
---    id_produto int NOT NULL,
---    data_favorito DATE NOT NULL,
---    FOREIGN KEY (cnpj_ong) REFERENCES ong(cpnj),
---    FOREIGN KEY (id_produto) REFERENCES produto(id)
---);
 
 -- Doacao
 CREATE TABLE doacao (

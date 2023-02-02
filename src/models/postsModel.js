@@ -1,7 +1,10 @@
 const db = require('./database');
+const query = require('../util/query');
 
-const getAll = async () => {
-    const posts = await db.exec('SELECT * FROM post');
+const getAll = async (filters) => {
+    let q = 'SELECT * FROM post';
+    q = query.where(q, filters);
+    const posts = await db.exec(q);
     return posts.rows;
 }
 
@@ -12,10 +15,10 @@ const getPost = async (id) => {
 
 const createPost = async (post) => {
     const dateUTC = new Date(Date.now()).toUTCString();
-    const { id_produto, descricao, cnpj_emp } =  post;
+    const { produto_id, descricao, cnpj_emp } = post;
 
-    const q = 'INSERT INTO post(id, id_produto, descricao, cnpj_emp, data_inicio, status) VALUES ($1, $2, $3, $4, $5, $6)';
-    await db.exec(q, [1, id_produto, descricao, cnpj_emp, dateUTC, 'aberto']);  //ver como gerar o id automaticamente
+    const q = 'INSERT INTO post(produto_id, descricao, cnpj_emp, data_inicio, status) VALUES ($1, $2, $3, $4, $5)';
+    await db.exec(q, [produto_id, descricao, cnpj_emp, dateUTC, 'aberto']);
 }
 
 const deletePost = async (id) => {
@@ -23,11 +26,10 @@ const deletePost = async (id) => {
 }
 
 const updatePost = async (id, post) => {
-    const dateUTC = new Date(Date.now()).toUTCString(); //considera que atualiza a data tb
-    const { id_produto, descricao, cnpj_emp } =  post;
+    const { produto_id, descricao, cnpj_emp } = post;
 
-    const q = 'UPDATE post SET id_produto = $1, descricao = $2, cnpj_emp = $3, data_inicio = $4, status = $5 WHERE id = $6';
-    const v = [id_produto, descricao, cnpj_emp, dateUTC, 'aberto', id]; //id não muda
+    const q = 'UPDATE post SET produto_id = $1, descricao = $2, cnpj_emp = $3, status = $4 WHERE id = $5';
+    const v = [produto_id, descricao, cnpj_emp, 'aberto', id];
     await db.exec(q, v);
 }
 
