@@ -1,5 +1,6 @@
 const interesseModel = require('../models/interesseModel');
 const notificaçãoModel = requeire('../models/notificacaoModel');
+const postModel = require('../models/postsModel');
 
 const getInteresse = async (request, response) => {
     const { id } = request.params;
@@ -28,9 +29,12 @@ const addInteresse = async (request, response) => {
         const [interesse] = await interesseModel.getInteresse(id, request.body);
         if (interesse.length == 0) {
             await interesseModel.addInteresse(id, request.body);
+            const { cnpj_ong } = request.body;
             //pegar o cnpj da empresa a partir do id do post
+            //const [post] = postModel.getPost(id);
             //cnpj_emp = postModel.getCnpjPost(id)
-            //notificaçãoModel.addNotificacao(cnpj_emp,'Uma ong marcou interesse no seu post.');
+            notificacao = JSON.stringify({ cnpj_emp: '123', cnpj_ong: cnpj_ong, id_post: id});
+            notificaçãoModel.addNotificacao(notificacao);
         }
         return response.status(204).json();
     } catch (err) {

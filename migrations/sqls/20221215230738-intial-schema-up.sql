@@ -57,7 +57,6 @@ CREATE TABLE interesse_post (
 --    cnpj_ong char(14) NOT NULL,
 --    id_post int NOT NULL,
 --    data DATE NOT NULL,
---    mensagem TEXT NOT NULL,
 --    lida BOOLEAN NOT NULL,
 --    FOREIGN KEY (cnpj_emp) REFERENCES empresa(cnpj),
 --    FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),

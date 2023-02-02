@@ -7,10 +7,10 @@ const getNotificacoesByEmpresa = async (cnpj_emp) => {
 
 const addNotificacao = async (notificacao) => {
     const dateUTC = new Date(Date.now()).toUTCString();
-    const { cnpj_emp, cnpj_ong, id_post, mensagem } = notificacao;
+    const { cnpj_emp, cnpj_ong, id_post } = notificacao;
 
-    const q = 'INSERT INTO notificacao_interesse(cnpj_emp, cnpj_ong, id_post, data, mensagem, lida) VALUES ($1, $2, $3, $4, $5, $6)';
-    await db.exec(q, [cnpj_emp, cnpj_ong, id_post, dateUTC, mensagem, false]);
+    const q = 'INSERT INTO notificacao_interesse(cnpj_emp, cnpj_ong, id_post, data, lida) VALUES ($1, $2, $3, $4, $5)';
+    await db.exec(q, [cnpj_emp, cnpj_ong, id_post, dateUTC, false]);
 };
 
 const readNotificacao = async (id) => {
