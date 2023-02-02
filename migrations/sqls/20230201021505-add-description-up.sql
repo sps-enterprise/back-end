@@ -1,0 +1,9 @@
+ALTER TABLE empresa ADD slogan TEXT DEFAULT '';
+ALTER TABLE empresa ADD historia TEXT DEFAULT '';
+ALTER TABLE empresa ADD missao TEXT DEFAULT '';
+ALTER TABLE empresa ADD atividades TEXT DEFAULT '';
+
+ALTER TABLE ong ADD slogan TEXT DEFAULT '';
+ALTER TABLE ong ADD historia TEXT DEFAULT '';
+ALTER TABLE ong ADD missao TEXT DEFAULT '';
+ALTER TABLE ong ADD atividades TEXT DEFAULT '';

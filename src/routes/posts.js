@@ -11,16 +11,16 @@ router.get('/:id', postsControlller.getPost);
 router.post('/', 
   authMiddleware, 
   postsMiddleware.validateBody, 
-  postsMiddleware.validateCNPJEmpresa, 
-  postsMiddleware.validateIdProduto, 
+  // postsMiddleware.validateCNPJ, 
+  // postsMiddleware.validateIdProduto, 
   postsControlller.createPost,
 );
 router.delete('/:id', authMiddleware, postsControlller.deletePost);
 router.put('/:id', 
   authMiddleware,
   postsMiddleware.validateBody, 
-  postsMiddleware.validateCNPJEmpresa, 
-  postsMiddleware.validateIdProduto, 
+  // postsMiddleware.validateCNPJ, 
+  // postsMiddleware.validateIdProduto, 
   postsControlller.updatePost,
 );
 
