@@ -1,6 +1,6 @@
 const interesseModel = require('../models/interesseModel');
 const notificaçãoModel = requeire('../models/notificacaoModel');
-const postModel = require('../models/postsModel');
+const postsModel = require('../models/postsModel');
 
 const getInteresse = async (request, response) => {
     const { id } = request.params;
@@ -15,7 +15,7 @@ const getInteresse = async (request, response) => {
 const getInteresseByEmpresa = async (request, response) => {
     const { cnpj } = request.params;
     try {
-        const [interesses] = await interesseModel.getInteresseByEmpresa(cnpj);        
+        const interesses = await interesseModel.getInteresseByEmpresa(cnpj);        
         return response.status(200).json(interesses);
     } catch (err) {
         return response.status(500).json(err.message);
@@ -29,11 +29,12 @@ const addInteresse = async (request, response) => {
         const [interesse] = await interesseModel.getInteresse(id, request.body);
         if (interesse.length == 0) {
             await interesseModel.addInteresse(id, request.body);
+
             const { cnpj_ong } = request.body;
-            //pegar o cnpj da empresa a partir do id do post
-            //const [post] = postModel.getPost(id);
-            //cnpj_emp = postModel.getCnpjPost(id)
-            notificacao = JSON.stringify({ cnpj_emp: '123', cnpj_ong: cnpj_ong, id_post: id});
+            const [post] = await postsModel.getPost(id);
+            const { cnpj_emp } = post;
+            
+            notificacao = JSON.stringify({ cnpj_emp: cnpj_emp, cnpj_ong: cnpj_ong, id_post: id});
             notificaçãoModel.addNotificacao(notificacao);
         }
         return response.status(204).json();

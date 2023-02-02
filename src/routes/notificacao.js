@@ -8,7 +8,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 router.get('/:cnpj',
   authMiddleware,
-  notificacaoMiddleware.validateBody,
   notificacaoController.getNotificacoesByEmpresa,
 );
 router.post(
@@ -18,11 +17,9 @@ router.post(
 );
 router.put('/:id',
   authMiddleware,
-  notificacaoMiddleware.validateBody,
   notificacaoController.readNotificacao,
 );
 router.delete('/:id',
   authMiddleware,
-  notificacaoMiddleware.validateBody,
   notificacaoController.removeNotificacao,
 );

@@ -13,7 +13,6 @@ router.get('/:id',
 );
 router.get('/emp/:cnpj',
   authMiddleware,
-  interesseMiddleware.validateBody,
   interesseController.getInteresseByEmpresa,
 );
 router.post('/:id',

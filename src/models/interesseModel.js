@@ -8,8 +8,8 @@ const getInteresse = async (id_post, ong) => {
 };
 
 const getInteresseByEmpresa = async (cnpj_emp) => {
-    const interesse = await db.exec('SELECT i.cnpj_ong, i.id_post, i.data_interesse, i.status FROM interesse_post AS i INNER JOIN post AS p ON i.id_post=p.id WHERE p.cnpj_emp=$1', [cnpj_emp]);
-    return interesse.rows;
+    const interesses = await db.exec('SELECT i.cnpj_ong, i.id_post, i.data_interesse, i.status FROM interesse_post AS i INNER JOIN post AS p ON i.id_post=p.id WHERE p.cnpj_emp=$1', [cnpj_emp]);
+    return interesses.rows;
 };
 
 const addInteresse = async (id_post, ong) => {
