@@ -29,25 +29,10 @@ const updateProduto = async (id, produto) => {
 	await db.exec(q, v);
 };
 
-const addFavorito = async (id_produto, ong) => {
-	const dateUTC = new Date(Date.now()).toUTCString();
-    const { cnpj_ong } = ong;
-
-    const q = 'INSERT INTO favoritos(cnpj_ong, id_produto, data_favorito) VALUES ($1, $2, $3)';
-    await db.exec(q, [cnpj_ong, id_produto, dateUTC]);	
-};
-
-const removeFavorito = async (id_produto, ong) => {
-	const { cnpj_ong } = ong;
-	await db.exec('DELETE FROM favoritos WHERE cnpj_ong = $1 AND id_produto = $2', [cnpj_ong, id_produto]);
-};
-
 module.exports = {
 	getAll,
 	getProduto,
 	createProduto,
 	deleteProduto,
 	updateProduto,
-	addFavorito,
-	removeFavorito,
 };

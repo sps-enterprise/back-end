@@ -48,27 +48,10 @@ const updateProduto = async (request, response) => {
 	}
 };
 
-const addFavorito = async (request, response) => {
-	const { id } = request.params;
-	
-	await produtoModel.addFavorito(id, request.body);
-    return response.status(204).json();
-};
-
-const removeFavorito = async (request, response) => {
-	const { id } = request.params;
-	
-	// e se o produto não estiver favoritado?
-	await produtoModel.removeFavorito(id, request.body);
-    return response.status(204).json();
-};
-
 module.exports = {
 	getAll,
 	getProduto,
 	createProduto,
 	deleteProduto,
 	updateProduto,
-	addFavorito,
-	removeFavorito,
 };
