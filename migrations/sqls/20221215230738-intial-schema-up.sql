@@ -41,7 +41,7 @@ CREATE TABLE doacao (
 );
 
 -- Interesse Post
--- adicionar a coluna: status VARCHAR(10) (status = 'aberto' OR status = 'aceito' OR status = 'rejeitado')
+-- adicionar a coluna: status VARCHAR(10) (status = 'pendente' OR status = 'aceito' OR status = 'rejeitado')
 CREATE TABLE interesse_post (
     cnpj_ong char(14) NOT NULL,
     id_post int NOT NULL,

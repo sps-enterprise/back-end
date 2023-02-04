@@ -17,7 +17,7 @@ const addInteresse = async (id_post, ong) => {
     const { cnpj_ong } = ong;
 
     const q = 'INSERT INTO interesse_post(cnpj_ong, id_post, data_interesse, status) VALUES ($1, $2, $3)';
-    await db.exec(q, [cnpj_ong, id_post, dateUTC, 'aberto']);
+    await db.exec(q, [cnpj_ong, id_post, dateUTC, 'pendente']);
 };
 
 const removeInteresse = async (id_post, ong) => {
