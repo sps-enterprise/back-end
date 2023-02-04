@@ -1,20 +1,22 @@
 const db = require('./database');
 
-const getNotificacoesByEmpresa = async (cnpj_emp) => {
-    const notificacoes = await db.exec('SELECT * FROM notificacao_interesse WHERE cnpj_emp = $1', [cnpj_emp]);
+const getAll = async (cnpj_emp) => {
+    const q = "SELECT cnpj_ong, produto_id, descricao FROM notificacao_interesse AS n JOIN post AS p ON n.post_id = p.id WHERE cnpj_emp = $1 AND open? = FALSE";
+
+    const notificacoes = await db.exec(q, [cnpj_emp]);
     return notificacoes.rows;
 };
 
-const addNotificacao = async (notificacao) => {
+const createNotificacao = async (notificacao) => {
     const dateUTC = new Date(Date.now()).toUTCString();
-    const { cnpj_emp, cnpj_ong, id_post } = notificacao;
+    const { cnpj_ong, id_post } = notificacao;
 
-    const q = 'INSERT INTO notificacao_interesse(cnpj_emp, cnpj_ong, id_post, data, lida) VALUES ($1, $2, $3, $4, $5)';
-    await db.exec(q, [cnpj_emp, cnpj_ong, id_post, dateUTC, false]);
+    const q = 'INSERT INTO notificacao_interesse(cnpj_ong, id_post, date, open?) VALUES ($1, $2, $3, $4)';
+    await db.exec(q, [cnpj_ong, id_post, dateUTC, false]);
 };
 
 const readNotificacao = async (id) => {
-    await db.exec('UPDATE notificacao_interesse SET lida = $1 WHERE id = $2', [true, id]);
+    await db.exec('UPDATE notificacao_interesse SET open? = $1 WHERE id = $2', [true, id]);
 };
 
 const removeNotificacao = async (id) => {
@@ -26,8 +28,8 @@ const removeNotificacaoByInteresse = async (id_post, cnpj_ong) => {
 };
 
 module.exports = {
-    getNotificacoesByEmpresa,
-    addNotificacao,
+    getAll,
+    createNotificacao,
     readNotificacao,
     removeNotificacao,
     removeNotificacaoByInteresse,

@@ -13,10 +13,11 @@ router.get('/:cnpj',
 router.post(
   authMiddleware,
   notificacaoMiddleware.validateBody,
-  notificacaoController.addNotificacao,
+  notificacaoController.createNotificacao,
 );
 router.put('/:id',
   authMiddleware,
+  notificacaoMiddleware.validateBody,
   notificacaoController.readNotificacao,
 );
 router.delete('/:id',

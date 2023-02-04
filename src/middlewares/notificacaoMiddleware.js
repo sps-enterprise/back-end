@@ -1,11 +1,6 @@
 const validateBody = (request, response, next) => {
   const { body } = request;
 
-  if(!body['cnpj_emp']) {
-    return response
-      .status(400)
-      .json({ message: "The field cnpj_emp is required" });
-  }
   if(!body['cnpj_ong']) {
     return response
       .status(400)
