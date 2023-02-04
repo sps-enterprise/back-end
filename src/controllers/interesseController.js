@@ -1,5 +1,5 @@
 const interesseModel = require('../models/interesseModel');
-const notificacaoModel = requeire('../models/notificacaoModel');
+const notificacaoModel = require('../models/notificacaoModel');
 const postsModel = require('../models/postsModel');
 
 const getInteresse = async (request, response) => {
