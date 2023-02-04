@@ -1,0 +1,5 @@
+ALTER TABLE ong ADD image TEXT DEFAULT '';
+
+ALTER TABLE empresa ADD image TEXT DEFAULT '';
+
+ALTER TABLE post ADD image TEXT DEFAULT '';

@@ -1,0 +1,5 @@
+ALTER TABLE ong DROP COLUMN image;
+
+ALTER TABLE empresa DROP COLUMN image;
+
+ALTER TABLE post DROP COLUMN imgae;

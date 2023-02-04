@@ -15,10 +15,10 @@ const getPost = async (id) => {
 
 const createPost = async (post) => {
     const dateUTC = new Date(Date.now()).toUTCString();
-    const { produto_id, descricao, cnpj_emp } = post;
+    const { produto_id, descricao, cnpj_emp, image } = post;
 
-    const q = 'INSERT INTO post(produto_id, descricao, cnpj_emp, data_inicio, status) VALUES ($1, $2, $3, $4, $5)';
-    await db.exec(q, [produto_id, descricao, cnpj_emp, dateUTC, 'aberto']);
+    const q = 'INSERT INTO post(produto_id, descricao, cnpj_emp, data_inicio, status, image) VALUES ($1, $2, $3, $4, $5, $6)';
+    await db.exec(q, [produto_id, descricao, cnpj_emp, dateUTC, 'aberto', image]);
 }
 
 const deletePost = async (id) => {
@@ -26,10 +26,10 @@ const deletePost = async (id) => {
 }
 
 const updatePost = async (id, post) => {
-    const { produto_id, descricao, cnpj_emp } = post;
+    const { produto_id, descricao, cnpj_emp, image } = post;
 
-    const q = 'UPDATE post SET produto_id = $1, descricao = $2, cnpj_emp = $3, status = $4 WHERE id = $5';
-    const v = [produto_id, descricao, cnpj_emp, 'aberto', id];
+    const q = 'UPDATE post SET produto_id = $1, descricao = $2, cnpj_emp = $3, status = $4, image = $5 WHERE id = $6';
+    const v = [produto_id, descricao, cnpj_emp, 'aberto', image, id];
     await db.exec(q, v);
 }
 
