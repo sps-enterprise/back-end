@@ -1,5 +1,5 @@
 const interesseModel = require('../models/interesseModel');
-const notificaçãoModel = requeire('../models/notificacaoModel');
+const notificacaoModel = requeire('../models/notificacaoModel');
 const postsModel = require('../models/postsModel');
 
 const getInteresse = async (request, response) => {
@@ -35,7 +35,7 @@ const addInteresse = async (request, response) => {
             const { cnpj_emp } = post;
             
             notificacao = JSON.stringify({ cnpj_emp: cnpj_emp, cnpj_ong: cnpj_ong, id_post: id});
-            notificaçãoModel.addNotificacao(notificacao);
+            notificacaoModel.addNotificacao(notificacao);
         }
         return response.status(204).json();
     } catch (err) {
@@ -48,7 +48,9 @@ const removeInteresse = async (request, response) => {
 
     try {
         await interesseModel.removeInteresse(id, request.body);
-        //remover notificação?
+
+        const { cnpj_ong } = request.body;
+        notificacaoModel.removeNotificacaoByInteresse(id, cnpj_ong)
         return response.status(204).json();
     } catch (err) {
         return response.status(500).json(err.message);

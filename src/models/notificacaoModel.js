@@ -21,9 +21,14 @@ const removeNotificacao = async (id) => {
     await db.exec('DELETE FROM notificacao_interesse WHERE id = $1', [id]);
 };
 
+const removeNotificacaoByInteresse = async (id_post, cnpj_ong) => {
+    await db.exec('DELETE FROM notificacao_interesse WHERE cnpj_ong = $1 AND id_post = $2', [cnpj_ong, id_post]);
+};
+
 module.exports = {
     getNotificacoesByEmpresa,
     addNotificacao,
     readNotificacao,
     removeNotificacao,
+    removeNotificacaoByInteresse,
 };
