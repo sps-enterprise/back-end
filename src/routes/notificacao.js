@@ -6,20 +6,43 @@ const notificacaoController = require('../controllers/notificacaoController');
 const notificacaoMiddleware = require('../middlewares/notificacaoMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/:cnpj',
+router.get('/interesse/:cnpj',
   authMiddleware,
   notificacaoController.getNotificacoesByEmpresa,
 );
-router.post(
+router.post('/interesse',
   authMiddleware,
-  notificacaoMiddleware.validateBody,
-  notificacaoController.addNotificacao,
+  notificacaoMiddleware.validateBodyInteresse,
+  notificacaoController.addNotificacaoInteresse,
 );
-router.put('/:id',
+router.put('interesse/:id',
   authMiddleware,
-  notificacaoController.readNotificacao,
+  notificacaoController.readNotificacaoInteresse,
 );
-router.delete('/:id',
+router.delete('interesse/:id',
   authMiddleware,
-  notificacaoController.removeNotificacao,
+  notificacaoController.removeNotificacaoInteresse,
 );
+router.get('/disponibilidade/:cnpj',
+  authMiddleware,
+  notificacaoController.getNotificacoesByONG,
+);
+router.post('/disponibilidade',
+  authMiddleware,
+  notificacaoMiddleware.validateBodyDisponibilidade,
+  notificacaoController.addNotificacaoDisponibilidade,
+);
+router.post('/disponibilidade/:id',
+  authMiddleware,
+  notificacaoController.notificarONGsDisponibilidade,
+);
+router.put('disponibilidade/:id',
+  authMiddleware,
+  notificacaoController.readNotificacaoDisponibilidade,
+);
+router.delete('disponibilidade/:id',
+  authMiddleware,
+  notificacaoController.removeNotificacaoDisponibilidade,
+);
+
+module.exports = router;

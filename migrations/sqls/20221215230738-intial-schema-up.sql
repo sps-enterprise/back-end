@@ -62,3 +62,15 @@ CREATE TABLE interesse_post (
 --    FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
 --    FOREIGN KEY (id_post) REFERENCES post(id)
 --);
+
+
+-- Adicionar a tabela notificação de disponibilidade
+--CREATE TABLE notificacao_disponibilidade (
+--    id SERIAL PRIMARY KEY,
+--    cnpj_ong char(14) NOT NULL,
+--    id_post int NOT NULL,
+--    data DATE NOT NULL,
+--    lida BOOLEAN NOT NULL,
+--    FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
+--    FOREIGN KEY (id_post) REFERENCES post(id)
+--);
