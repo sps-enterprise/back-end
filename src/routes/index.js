@@ -9,5 +9,7 @@ router.use("/admin/", require("./admin"));
 router.use('/posts/', require('./posts'));
 router.use('/produto/', require('./produto'));
 router.use('/favorito/', require('./favorito'));
+router.use('/interesse/', require('./interesse'));
+router.use('/notificacao/', require('./notificacao'));
 
 module.exports = router;

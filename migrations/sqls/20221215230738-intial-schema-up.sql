@@ -41,6 +41,7 @@ CREATE TABLE doacao (
 );
 
 -- Interesse Post
+-- adicionar a coluna: status VARCHAR(10) (status = 'aberto' OR status = 'aceito' OR status = 'rejeitado')
 CREATE TABLE interesse_post (
     cnpj_ong char(14) NOT NULL,
     id_post int NOT NULL,
@@ -48,3 +49,16 @@ CREATE TABLE interesse_post (
     FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
     FOREIGN KEY (id_post) REFERENCES post(id) 
 );
+
+-- Adicionar a tabela notificação de interesse
+--CREATE TABLE notificacao_interesse (
+--    id SERIAL PRIMARY KEY,
+--    cnpj_emp char(14) NOT NULL,
+--    cnpj_ong char(14) NOT NULL,
+--    id_post int NOT NULL,
+--    data DATE NOT NULL,
+--    lida BOOLEAN NOT NULL,
+--    FOREIGN KEY (cnpj_emp) REFERENCES empresa(cnpj),
+--    FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
+--    FOREIGN KEY (id_post) REFERENCES post(id)
+--);
