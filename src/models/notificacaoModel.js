@@ -1,7 +1,7 @@
 const db = require('./database');
 
 const getAll = async (cnpj_emp) => {
-    const q = "SELECT cnpj_ong, produto_id, descricao FROM interesse_post AS i JOIN post AS p ON i.post_id = p.id WHERE cnpj_emp = $1";
+    const q = "SELECT cnpj_ong, produto_id, descricao FROM interesse_post AS i JOIN post AS p ON i.id_post = p.id WHERE cnpj_emp = $1";
 
     const notificacoes = await db.exec(q, [cnpj_emp]);
     return notificacoes.rows;
