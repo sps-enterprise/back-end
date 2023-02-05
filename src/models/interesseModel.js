@@ -41,7 +41,7 @@ const deleteInteresse = async (cnpj_ong, id_post) => {
 const updateInteresse = async (cnpj_ong, id_post, status) => {
     const dateUTC = new Date(Date.now()).toUTCString();
 
-    const q = 'UPDATE interesse_post SET status_i = $1, data_interesse = $2 WHERE cnpj_ong = $3 AND id_post = $4 VALUES ($1, $2, $3, $4)';
+    const q = 'UPDATE interesse_post SET status_i = $1, data_interesse = $2 WHERE cnpj_ong = $3 AND id_post = $4';
     await db.exec(q, [status, dateUTC, cnpj_ong, id_post]);
 };
 
