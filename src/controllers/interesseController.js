@@ -64,7 +64,7 @@ const aceitarInteresse = async (request, response) => {
 const rejeitarInteresse = async (request, response) => {
     const { cnpj_ong, id_post } = request.query;
     try {
-        await interesseModel.rejeitarInteresse(cnpj_ong, id_post, 'negado');
+        await interesseModel.updateInteresse(cnpj_ong, id_post, 'negado');
         return response.status(204).json();
     } catch (err) {
         return response.status(500).json(err.message);        
