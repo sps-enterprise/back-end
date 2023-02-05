@@ -48,3 +48,4 @@ CREATE TABLE interesse_post (
     FOREIGN KEY (cnpj_ong) REFERENCES ong(cnpj),
     FOREIGN KEY (id_post) REFERENCES post(id) 
 );
+

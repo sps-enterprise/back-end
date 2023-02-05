@@ -8,6 +8,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 router.get('/', postsControlller.getAll);
 router.get('/:id', postsControlller.getPost);
+router.get('/interesse/:cnpj', authMiddleware, postsControlller.getPostsInteresse);
 router.post('/', 
   authMiddleware, 
   postsMiddleware.validateBody, 

@@ -20,7 +20,7 @@ const validateBody = (request, response, next) => {
     next();
 };
 
-const validateCNPJ = async (request, response, next) => {
+const validateCNPJEmpresa = async (request, response, next) => {
     const { id_produto, descricao, cnpj_emp } = request.body;
 
     try{
@@ -46,6 +46,6 @@ const validateIdProduto = async (request, response, next) => {
 
 module.exports = {
     validateBody,
-    validateCNPJ,
+    validateCNPJEmpresa,
     validateIdProduto
 };
