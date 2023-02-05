@@ -20,9 +20,9 @@ const createNotificacao = async (request, response) => {
 };
 
 const readNotificacao = async (request, response) => {
-    const { id } = request.params;
+    const { cnpj_ong, id_post } = request.params;
     try {
-        await notificacaoModel.readNotificacao(id);
+        await notificacaoModel.readNotificacao(cnpj_ong, id_post);
         return response.status(200).json();
     } catch (err) {
         return response.status(500).json(err.message);
@@ -30,9 +30,9 @@ const readNotificacao = async (request, response) => {
 };
 
 const removeNotificacao = async (request, response) => {
-    const { id } = request.params;
+    const { cnpj_ong, id_post } = request.params;
     try {
-        await notificacaoModel.removeNotificacao(id);        
+        await notificacaoModel.deleteNotificacao(cnpj_ong, id_post);        
         return response.status(200).json();
     } catch (err) {
         return response.status(500).json(err.message);

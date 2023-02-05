@@ -3,24 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 const notificacaoController = require('../controllers/notificacaoController');
-const notificacaoMiddleware = require('../middlewares/notificacaoMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/:cnpj',
+// Read interesse by cnpj_ong and id_post (query)
+router.put('/',
   authMiddleware,
-  notificacaoController.getNotificacoesByEmpresa,
-);
-router.post(
-  authMiddleware,
-  notificacaoMiddleware.validateBody,
-  notificacaoController.createNotificacao,
-);
-router.put('/:id',
-  authMiddleware,
-  notificacaoMiddleware.validateBody,
   notificacaoController.readNotificacao,
 );
-router.delete('/:id',
-  authMiddleware,
-  notificacaoController.removeNotificacao,
-);
+
+module.exports = router;

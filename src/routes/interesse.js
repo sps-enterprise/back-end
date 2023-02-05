@@ -6,32 +6,51 @@ const interesseController = require('../controllers/interesseController');
 const interesseMiddleware = require('../middlewares/interesseMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/:id',
+// ONGs endpoints
+
+// Get interesse by cnpj_ong and id_post (query)
+router.get('/',
   authMiddleware,
-  interesseMiddleware.validateBody,
   interesseController.getInteresse,
 );
-router.get('/emp/:cnpj',
+
+// Get interesses from cnpj_ong (param)
+router.get('/ong/:cnpj_ong/',
   authMiddleware,
-  interesseController.getInteresseByEmpresa,
+  interesseController.getInteresseByOng,
 );
-router.post('/:id',
+
+// Create interesse (body)
+router.post('/',
   authMiddleware,
   interesseMiddleware.validateBody,
   interesseController.addInteresse,
 );
-router.delete('/:id',
+
+// Remove interesse by cnpj_ong and id_post (query)
+router.delete('/',
   authMiddleware,
-  interesseMiddleware.validateBody,
   interesseController.removeInteresse,
 );
-router.put('/aceitar/:id',
+
+// Empresas endpoints
+
+// Accept interesse by cnpj_ong and id_post (query)
+router.put('/aceitar/',
   authMiddleware,
-  interesseMiddleware.validateBody,
   interesseController.aceitarInteresse,
 );
-router.put('/rejeitar/:id',
+
+// Reject interesse by cnpj_ong and id_post (query)
+router.put('/rejeitar/',
   authMiddleware,
-  interesseMiddleware.validateBody,
   interesseController.rejeitarInteresse,
 );
+
+// Get interesses from cnpj_emp (param)
+router.get('/emp/:cnpj_emp/',
+  authMiddleware,
+  interesseController.getInteresseByEmpresa,
+);
+
+module.exports = router;

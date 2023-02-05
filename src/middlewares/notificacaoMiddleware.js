@@ -13,8 +13,8 @@ const validateBody = (request, response, next) => {
   }
   
   next();
-  };
+};
   
-  module.exports = {
-    validateBody,
-  };
+module.exports = {
+  validateBody,
+};
