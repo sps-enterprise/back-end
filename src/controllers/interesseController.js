@@ -15,7 +15,7 @@ const getInteresse = async (request, response) => {
 const getInteresseByOng = async (request, response) => {
     const { cnpj_ong } = request.params;
     try {
-        const interesses = await interesseModel.getInteresseByOng(cnpj_ong);        
+        const interesses = await interesseModel.getInteresseByONG(cnpj_ong);        
         return response.status(200).json(interesses);
     } catch (err) {
         return response.status(500).json(err.message);
@@ -34,7 +34,7 @@ const getInteresseByEmpresa = async (request, response) => {
 
 const addInteresse = async (request, response) => {
     try {
-        const [interesse] = await interesseModel.createInteresse(request.body);
+        await interesseModel.createInteresse(request.body);
         return response.status(201).json();
     } catch (err) {
         return response.status(500).json(err.message);

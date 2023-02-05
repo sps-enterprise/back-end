@@ -79,8 +79,6 @@ const loginONG = async (request, response) => {
 	} catch (err) {
 		return response.status(500).json(err.message);
 	}
-	
-	
 };
 
 module.exports = {
